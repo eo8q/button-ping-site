@@ -116,7 +116,7 @@ button:active {
 
   <!-- Power -->
   <div class="center">
-    <button class="power" onclick="powerPress()">
+    <button class="shutdown" onclick="powerPress()">
       ⏻
       <div class="label">Power</div>
     </button>
@@ -151,7 +151,7 @@ button:active {
         <div class="label">Left</div>
       </button>
 
-      <button class="accent" onclick="send('pause')">
+      <button class="accent" onclick="send('click')">
         ❚❚
         <div class="label">Pause</div>
       </button>
@@ -182,11 +182,11 @@ button:active {
 
   <!-- Hide / Show -->
   <div class="row">
-    <button onclick="send('hide')">
+    <button onclick="send('open_batch')">
       🙈
       <div class="label">Hide</div>
     </button>
-    <button onclick="send('show')">
+    <button onclick="send('space')">
       👁
       <div class="label">Show</div>
     </button>
@@ -244,7 +244,7 @@ function powerPress() {
 
   clearTimeout(powerTimeout);
   powerArmed = false;
-  send('power');
+  send('shutdown');
 }
 </script>
 </body>
