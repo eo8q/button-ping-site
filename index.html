@@ -1,6 +1,133 @@
 <!DOCTYPE html>
 <html>
-  <body>
-    <h1>It works</h1>
-  </body>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remote</title>
+
+<style>
+  body {
+    background: #111;
+    color: white;
+    font-family: system-ui, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .remote {
+    width: 260px;
+    background: #1c1c1c;
+    border-radius: 30px;
+    padding: 20px;
+    box-shadow: 0 0 20px #000;
+  }
+
+  button {
+    background: #2a2a2a;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  button:active {
+    background: #444;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .wide {
+    width: 100%;
+    border-radius: 20px;
+  }
+
+  .small {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+
+  .spacer {
+    height: 15px;
+  }
+</style>
+</head>
+
+<body>
+<div class="remote">
+
+  <!-- Power -->
+  <div class="center">
+    <button onclick="send('power')">⏻</button>
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- Volume -->
+  <div class="row">
+    <button onclick="send('volup')">🔊</button>
+    <button onclick="send('voldown')">🔉</button>
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- Arrows -->
+  <div class="center">
+    <button class="small" onclick="send('up')">⬆</button>
+  </div>
+
+  <div class="row">
+    <button class="small" onclick="send('left')">⬅</button>
+    <button class="small" onclick="send('pause')">⏯</button>
+    <button class="small" onclick="send('right')">➡</button>
+  </div>
+
+  <div class="center">
+    <button class="small" onclick="send('down')">⬇</button>
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- Click -->
+  <div class="center">
+    <button onclick="send('click')">🖱</button>
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- Hide / Show -->
+  <div class="row">
+    <button class="small" onclick="send('hide')">👁</button>
+    <button class="small" onclick="send('show')">👁‍🗨</button>
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- Restart -->
+  <button class="wide" onclick="send('restart')">🔄 Restart</button>
+
+</div>
+
+<script>
+function send(cmd) {
+  fetch('https://example.com/?cmd=' + cmd, {
+    mode: 'no-cors'
+  });
+}
+</script>
+</body>
 </html>
