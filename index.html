@@ -206,15 +206,15 @@ button:active {
 
 // Expected URL:
 // /WEBHOOK_ID/PASSWORD
-const parts = location.pathname.split('/').filter(Boolean);
+const params = new URLSearchParams(location.search);
 
-if (parts.length < 2) {
+const WEBHOOK_ID = params.get('id');
+const PASSWORD = params.get('key');
+
+if (!WEBHOOK_ID || !PASSWORD) {
   document.body.innerHTML = 'Invalid remote link';
-  throw new Error('Missing webhook info');
+  throw new Error('Missing params');
 }
-
-const WEBHOOK_ID = parts[0];
-const PASSWORD = parts[1];
 
 function send(cmd) {
   const url =
