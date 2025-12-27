@@ -12,7 +12,9 @@
   --btn: #2c2c2e;
   --btn-active: #3a3a3c;
   --text: #ffffff;
+  --sub: #9a9a9c;
   --accent: #0a84ff;
+  --danger: #ff453a;
 }
 
 * {
@@ -24,7 +26,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui;
+  font-family: -apple-system, BlinkMacSystemFont, system-ui;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,7 +34,7 @@ body {
 }
 
 .remote {
-  width: 300px;
+  width: 320px;
   background: var(--panel);
   border-radius: 40px;
   padding: 24px;
@@ -43,17 +45,24 @@ button {
   background: var(--btn);
   border: none;
   color: var(--text);
-  font-size: 20px;
-  border-radius: 50%;
-  width: 64px;
-  height: 64px;
+  border-radius: 16px;
+  width: 70px;
+  height: 70px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 4px;
+  font-size: 18px;
 }
 
 button:active {
   background: var(--btn-active);
+}
+
+.label {
+  font-size: 11px;
+  color: var(--sub);
 }
 
 .row {
@@ -67,37 +76,37 @@ button:active {
   justify-content: center;
 }
 
+.spacer {
+  height: 18px;
+}
+
 .full {
   width: 100%;
-  border-radius: 18px;
-  height: 48px;
+  height: 52px;
+  border-radius: 14px;
   font-size: 16px;
 }
 
-.icon {
-  font-size: 24px;
-  line-height: 1;
-}
-
 .power {
-  color: #ff453a;
+  color: var(--danger);
 }
 
 .accent {
   color: var(--accent);
 }
 
+/* D-pad */
 .dpad {
-  margin: 20px 0;
+  margin: 16px 0;
+}
+
+.dpad button {
+  width: 64px;
+  height: 64px;
 }
 
 .dpad .center button {
-  width: 56px;
-  height: 56px;
-}
-
-.spacer {
-  height: 18px;
+  margin: 6px 0;
 }
 </style>
 </head>
@@ -109,6 +118,7 @@ button:active {
   <div class="center">
     <button class="power" onclick="send('power')">
       ⏻
+      <div class="label">Power</div>
     </button>
   </div>
 
@@ -117,48 +127,76 @@ button:active {
   <!-- Volume -->
   <div class="row">
     <button onclick="send('volup')">
-      <span class="icon">＋</span>
+      🔊
+      <div class="label">Vol +</div>
     </button>
     <button onclick="send('voldown')">
-      <span class="icon">−</span>
+      🔉
+      <div class="label">Vol −</div>
     </button>
   </div>
 
   <!-- D-Pad -->
   <div class="dpad">
     <div class="center">
-      <button onclick="send('up')">⌃</button>
+      <button onclick="send('up')">
+        ▲
+        <div class="label">Up</div>
+      </button>
     </div>
 
     <div class="row">
-      <button onclick="send('left')">‹</button>
-      <button class="accent" onclick="send('pause')">Ⅱ</button>
-      <button onclick="send('right')">›</button>
+      <button onclick="send('left')">
+        ◀
+        <div class="label">Left</div>
+      </button>
+
+      <button class="accent" onclick="send('pause')">
+        ❚❚
+        <div class="label">Pause</div>
+      </button>
+
+      <button onclick="send('right')">
+        ▶
+        <div class="label">Right</div>
+      </button>
     </div>
 
     <div class="center">
-      <button onclick="send('down')">⌄</button>
+      <button onclick="send('down')">
+        ▼
+        <div class="label">Down</div>
+      </button>
     </div>
   </div>
 
   <!-- Click -->
   <div class="center">
-    <button onclick="send('click')">●</button>
+    <button onclick="send('click')">
+      ⦿
+      <div class="label">Click</div>
+    </button>
   </div>
 
   <div class="spacer"></div>
 
   <!-- Hide / Show -->
   <div class="row">
-    <button onclick="send('hide')">◌</button>
-    <button onclick="send('show')">◎</button>
+    <button onclick="send('hide')">
+      🙈
+      <div class="label">Hide</div>
+    </button>
+    <button onclick="send('show')">
+      👁
+      <div class="label">Show</div>
+    </button>
   </div>
 
   <div class="spacer"></div>
 
   <!-- Restart -->
   <button class="full" onclick="send('restart')">
-    Restart
+    🔄 Restart
   </button>
 
 </div>
