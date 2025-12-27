@@ -1,69 +1,104 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Remote</title>
 
 <style>
-  body {
-    background: #111;
-    color: white;
-    font-family: system-ui, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
+:root {
+  --bg: #0e0e0f;
+  --panel: #1c1c1e;
+  --btn: #2c2c2e;
+  --btn-active: #3a3a3c;
+  --text: #ffffff;
+  --accent: #0a84ff;
+}
 
-  .remote {
-    width: 260px;
-    background: #1c1c1c;
-    border-radius: 30px;
-    padding: 20px;
-    box-shadow: 0 0 20px #000;
-  }
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 
-  button {
-    background: #2a2a2a;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    font-size: 22px;
-    cursor: pointer;
-  }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-  button:active {
-    background: #444;
-  }
+.remote {
+  width: 300px;
+  background: var(--panel);
+  border-radius: 40px;
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
 
-  .row {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-  }
+button {
+  background: var(--btn);
+  border: none;
+  color: var(--text);
+  font-size: 20px;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .center {
-    display: flex;
-    justify-content: center;
-  }
+button:active {
+  background: var(--btn-active);
+}
 
-  .wide {
-    width: 100%;
-    border-radius: 20px;
-  }
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin: 14px 0;
+}
 
-  .small {
-    width: 45px;
-    height: 45px;
-    font-size: 18px;
-  }
+.center {
+  display: flex;
+  justify-content: center;
+}
 
-  .spacer {
-    height: 15px;
-  }
+.full {
+  width: 100%;
+  border-radius: 18px;
+  height: 48px;
+  font-size: 16px;
+}
+
+.icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.power {
+  color: #ff453a;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.dpad {
+  margin: 20px 0;
+}
+
+.dpad .center button {
+  width: 56px;
+  height: 56px;
+}
+
+.spacer {
+  height: 18px;
+}
 </style>
 </head>
 
@@ -72,53 +107,59 @@
 
   <!-- Power -->
   <div class="center">
-    <button onclick="send('power')">⏻</button>
+    <button class="power" onclick="send('power')">
+      ⏻
+    </button>
   </div>
 
   <div class="spacer"></div>
 
   <!-- Volume -->
   <div class="row">
-    <button onclick="send('volup')">🔊</button>
-    <button onclick="send('voldown')">🔉</button>
+    <button onclick="send('volup')">
+      <span class="icon">＋</span>
+    </button>
+    <button onclick="send('voldown')">
+      <span class="icon">−</span>
+    </button>
   </div>
 
-  <div class="spacer"></div>
+  <!-- D-Pad -->
+  <div class="dpad">
+    <div class="center">
+      <button onclick="send('up')">⌃</button>
+    </div>
 
-  <!-- Arrows -->
-  <div class="center">
-    <button class="small" onclick="send('up')">⬆</button>
+    <div class="row">
+      <button onclick="send('left')">‹</button>
+      <button class="accent" onclick="send('pause')">Ⅱ</button>
+      <button onclick="send('right')">›</button>
+    </div>
+
+    <div class="center">
+      <button onclick="send('down')">⌄</button>
+    </div>
   </div>
-
-  <div class="row">
-    <button class="small" onclick="send('left')">⬅</button>
-    <button class="small" onclick="send('pause')">⏯</button>
-    <button class="small" onclick="send('right')">➡</button>
-  </div>
-
-  <div class="center">
-    <button class="small" onclick="send('down')">⬇</button>
-  </div>
-
-  <div class="spacer"></div>
 
   <!-- Click -->
   <div class="center">
-    <button onclick="send('click')">🖱</button>
+    <button onclick="send('click')">●</button>
   </div>
 
   <div class="spacer"></div>
 
   <!-- Hide / Show -->
   <div class="row">
-    <button class="small" onclick="send('hide')">👁</button>
-    <button class="small" onclick="send('show')">👁‍🗨</button>
+    <button onclick="send('hide')">◌</button>
+    <button onclick="send('show')">◎</button>
   </div>
 
   <div class="spacer"></div>
 
   <!-- Restart -->
-  <button class="wide" onclick="send('restart')">🔄 Restart</button>
+  <button class="full" onclick="send('restart')">
+    Restart
+  </button>
 
 </div>
 
