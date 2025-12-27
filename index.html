@@ -116,7 +116,7 @@ button:active {
 
   <!-- Power -->
   <div class="center">
-    <button class="power" onclick="send('power')">
+    <button class="power" onclick="powerPress()">
       ⏻
       <div class="label">Power</div>
     </button>
@@ -202,10 +202,49 @@ button:active {
 </div>
 
 <script>
+/* -------- CONFIG FROM URL -------- */
+
+// Expected URL:
+// /WEBHOOK_ID/PASSWORD
+const parts = location.pathname.split('/').filter(Boolean);
+
+if (parts.length < 2) {
+  document.body.innerHTML = 'Invalid remote link';
+  throw new Error('Missing webhook info');
+}
+
+const WEBHOOK_ID = parts[0];
+const PASSWORD = parts[1];
+
 function send(cmd) {
-  fetch('https://example.com/?cmd=' + cmd, {
-    mode: 'no-cors'
-  });
+  const url =
+    `https://${WEBHOOK_ID}.hooks.webhookrelay.com/` +
+    `?pass=${encodeURIComponent(PASSWORD)}` +
+    `&cmd=${encodeURIComponent(cmd)}`;
+
+  fetch(url, { mode: 'no-cors' });
+}
+
+/* -------- POWER CONFIRM -------- */
+
+let powerArmed = false;
+let powerTimeout = null;
+
+function powerPress() {
+  if (!powerArmed) {
+    powerArmed = true;
+    alert('Tap power again to confirm');
+
+    powerTimeout = setTimeout(() => {
+      powerArmed = false;
+    }, 3000);
+
+    return;
+  }
+
+  clearTimeout(powerTimeout);
+  powerArmed = false;
+  send('power');
 }
 </script>
 </body>
