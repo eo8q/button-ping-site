@@ -76,6 +76,12 @@ button:active {
   justify-content: center;
 }
 
+.power-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
 .spacer {
   height: 18px;
 }
@@ -114,11 +120,16 @@ button:active {
 <body>
 <div class="remote">
 
-  <!-- Power -->
-  <div class="center">
-    <button class="shutdown" onclick="powerPress()">
+  <!-- Power + Sign Out -->
+  <div class="power-row">
+    <button class="shutdown power" onclick="powerPress()">
       ⏻
       <div class="label">Power</div>
+    </button>
+
+    <button class="shutdown" onclick="send('lock')">
+      ⏻
+      <div class="label">Sign Out</div>
     </button>
   </div>
 
@@ -151,7 +162,7 @@ button:active {
         <div class="label">Left</div>
       </button>
 
-      <button class="accent" onclick="send('spacebar')">
+      <button class="accent" onclick="send('space')">
         ❚❚
         <div class="label">Pause</div>
       </button>
@@ -202,12 +213,7 @@ button:active {
 </div>
 
 <script>
-/* -------- CONFIG FROM URL -------- */
-
-// Expected URL:
-// /WEBHOOK_ID/PASSWORD
 const params = new URLSearchParams(location.search);
-
 const WEBHOOK_ID = params.get('id');
 const PASSWORD = params.get('key');
 
@@ -226,7 +232,6 @@ function send(cmd) {
 }
 
 /* -------- POWER CONFIRM -------- */
-
 let powerArmed = false;
 let powerTimeout = null;
 
